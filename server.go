@@ -7,7 +7,6 @@ package websocket
 import (
 	"bufio"
 	"errors"
-	"github.com/ddkwork/golibrary/mylog"
 	"io"
 	"net"
 	"net/http"
@@ -398,12 +397,12 @@ func (u *Upgrader) UpgradeEx(netConn net.Conn, brw *bufio.ReadWriter, r *http.Re
 	if u.HandshakeTimeout > 0 {
 		netConn.SetWriteDeadline(time.Now().Add(u.HandshakeTimeout))
 	}
-	mylog.Check2(netConn.Write(p))
+	_, err := netConn.Write(p)
 	if u.HandshakeTimeout > 0 {
 		netConn.SetWriteDeadline(time.Time{})
 	}
 
-	return c, nil
+	return c, err
 }
 
 // Upgrade upgrades the HTTP server connection to the WebSocket protocol.

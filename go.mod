@@ -1,5 +1,5 @@
 module github.com/ddkwork/websocket
 
-go 1.20
+go 1.22.3
 
-require golang.org/x/net v0.23.0
+require golang.org/x/net v0.25.0
